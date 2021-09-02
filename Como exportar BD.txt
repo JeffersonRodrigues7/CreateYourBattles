@@ -1,0 +1,8 @@
+-----Workbench 8.0----
+
+Server > 
+  Data Export > 
+    Em objection Selection seleciona o banco de dados >
+      Seleciona Export to Self-Contained File > 
+        Escolhe o caminho >
+          Start Export

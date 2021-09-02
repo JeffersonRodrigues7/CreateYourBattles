@@ -1,0 +1,257 @@
+<main>
+    <div class="row">
+
+        
+        <div class="col-12">
+            <div class="newList d-flex justify-content-center"> 
+                <form action="/reloadRank" method="GET">
+                    <button type="submit" class="btn btn-primary btn-success" data-bs-toggle="modal" data-bs-target="#reloadRanking">Atualizar Ranking</button>
+                </form>
+                <button type="button" class="btn btn-danger btn-top" data-bs-toggle="modal" data-bs-target="#newListModal">Adicionar nova lista</button>
+                <button type="button" class="btn btn-primary btn-top" data-bs-toggle="modal" data-bs-target="#newListModalTwo">Acrescentar registros</button>
+
+                <!----------------------------------Inicio Modal que abre ao clicar no botão "Adicionar nova lista"---------------------------------->
+                <div class="modal fade" id="newListModal" tabindex="-1" aria-labelledby="newListModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newListModalLabel">Nova Lista</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="/addAnimes" method="POST">
+                                    <div class="alertMessage"><h3><b><center>ATENÇÃO! AO CLICAR EM ENVIAR VOCÊ ESTARÁ SUBSTITUINDO TODO O CONTEÚDO ANTERIOR!</center></b></h3></div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Cole a lista abaixo:</label>
+                                        <textarea class="form-control" id="message-text" rows="10" name="animes"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="numberOption">Digite quantos caracteres devem ser eliminados no começo de cada registro:</label>
+                                        <input type="number" id="numberOption" name="numberOption">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary" id ="newListSendButton">Enviar</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!----------------------------------Fim Modal que abre ao clicar no botão "Adicionar nova lista"---------------------------------->
+
+                <!----------------------------------Inicio Modal que abre ao clicar no botão "Acrescentar registros"---------------------------------->
+                <div class="modal fade" id="newListModalTwo" tabindex="-1" aria-labelledby="newListModalLabelTwo" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newListModalLabelTwo">Novos registros</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="/incrementAnimes" method="POST">
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Cole os novos registros abaixo:</label>
+                                        <textarea class="form-control" id="message-textTwo" rows="10" name="animes"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="numberOption">Digite quantos caracteres devem ser eliminados no começo de cada registro:</label>
+                                        <input type="number" id="numberOptionTwo" name="numberOption">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-primary" id ="newListSendButtonTwo">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!----------------------------------Fim Modal que abre ao clicar no botão "Acrescentar registros"---------------------------------->
+
+                <!----------------------------------Inicio Modal que abre ao clicar no botão "Deletar Registros"---------------------------------->
+                <div class="modal fade" id="deleteRegistry" tabindex="-1" aria-labelledby="deleteRegistry" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteRegistry">Selecione os registros para deletar</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form action="/deleteRegistry" method="POST">
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-danger" id ="deleteRegistryButton">Apagar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!----------------------------------Fim Modal que abre ao clicar no botão "Deletar Registros"---------------------------------->
+
+            </div>
+        </div>
+        
+
+    </div><!--Fim da row-->
+
+    <div class="row">
+        <!----------------------------------Inicio Tabela do Ranking---------------------------------->
+        <div class="col-6">
+            <div class="table-responsive ranking">
+                <table class="table table-bordered align-middle">
+                      <thead class="table-dark align-middle">
+                        <tr>
+                            <th scope="col">Posição</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">% Vitória</th>
+                            <th scope="col">Vitórias</th>
+                            <th scope="col">Derrotas</th>
+                            <th scope="col">Batalhas</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {{#each animes}}
+                            <tr class="border-dark">
+                                <td>{{getIndex @index}}</td>
+                                <td>{{name}}</td>
+                                <td>{{getPercentage winpercentage}}</td>
+                                <td>{{victories}}</td>
+                                <td>{{defeats}}</td>
+                                <td>{{battles}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>     
+        </div>
+        <!----------------------------------Fim Tabela do Ranking---------------------------------->
+
+        <!----------------------------------Inicio dos Cards de Batalha---------------------------------->
+        <div class="col-6"> 
+            <div class="battleText row">
+                <h5>Use a seta esquerda para votar na opção da esquerda ou a seta direita para votar na opção da direita, a seta para baixo retorna para a batalha anterior. 
+                    Caso prefira, é possível utilizar os botões.</h5>
+            </div>
+
+            <div class="row">
+                {{#each battles}}
+                    <div class="col-sm-6">
+                        <div class="card  text-dark bg-light text-center">
+                            <div class="card-header"><h5><b>{{anime1}}</b></h5></div>
+                            <div class="card-body">
+                                <form action="/endBattle" method="POST">
+                                    <h5 class="card-title"> Posição: #{{getPosition ../animes anime1}}</h5>
+                                    <p class="card-text">
+                                        {{#each ../anime1Data}} <b>% Vitória:</b> {{getPercentage winpercentage}} {{/each}} &nbsp;
+                                        {{#each ../anime1Data}} <b>Vitórias:</b> {{victories}} {{/each}} &nbsp;
+                                        {{#each ../anime1Data}} <b>Derrotas:</b> {{defeats}} {{/each}} &nbsp;
+                                        {{#each ../anime1Data}} <b>Batalhas:</b> {{battles}} {{/each}}                                                       
+                                    </p>
+                                    <input type="hidden" name="battleID" value={{id}}>
+                                    <input type="hidden" name="animeWinner" value='{{anime1}}'>
+                                    <input type="hidden" name="animeLoser" value='{{anime2}}'>
+                                    <button type="submit" class="btn btn-dark" id ="winnerButtonAnime1">Votar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="card text-dark bg-light text-center">
+                            <div class="card-header"><h5><b>{{anime2}}</b></h5></div>
+                            <div class="card-body">
+                                <form action="/endBattle" method="POST">
+                                    <h5 class="card-title"> Posição: #{{getPosition ../animes anime2}}</h5>
+                                    <p class="card-text">
+                                        {{#each ../anime2Data}} <b>% Vitória:</b> {{getPercentage winpercentage}} {{/each}} &nbsp;
+                                        {{#each ../anime2Data}} <b>Vitórias:</b> {{victories}} {{/each}} &nbsp;
+                                        {{#each ../anime2Data}} <b>Derrotas:</b> {{defeats}} {{/each}} &nbsp;
+                                        {{#each ../anime2Data}} <b>Batalhas:</b> {{battles}} {{/each}}                                                       
+                                    </p>
+                                    <input type="hidden" name="battleID" value={{id}}>
+                                    <input type="hidden" name="animeWinner" value='{{anime2}}'>
+                                    <input type="hidden" name="animeLoser" value='{{anime1}}'>
+                                    <button type="submit" class="btn btn-dark" id ="winnerButtonAnime2">Votar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+
+                <div class="returnBattle row">
+                    <form action="/returnBattle" method="POST">
+                        <center><button type="submit" class="btn btn-secondary" id ="returnBattleButton">Retornar para batalha anterior</button></center>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!----------------------------------Fim dos Cards de Batalha---------------------------------->
+
+    </div><!--fim da row-->
+
+    <div class="row">
+        <!----------------------------------Inicio da lista de batalhas passadas---------------------------------->
+        <div class="col-6">
+            <div class="titleText"><h2><center>Histórico de Batalha</center></h2></div>
+            <div class="table-responsive pastBattles">
+                <table class="table table-bordered align-middle">
+                      <thead class="table-dark align-middle">
+                        <tr>
+                            <th scope="col">Número da batalha</th>
+                            <th scope="col">Combatente 1</th>
+                            <th scope="col">Combatente 2</th>
+                            <th scope="col">Vencedor</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {{#each pastBattles}}
+                            <tr class="border-dark">
+                                <td>{{battleNumber}}</td>
+                                <td>{{anime1}}</td>
+                                <td>{{anime2}}</td>
+                                <td>{{winner}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>     
+        </div>
+        <!----------------------------------Fim da lista de batalhas passadas---------------------------------->
+
+        <div class="col-3"></div>
+
+        <!----------------------------------Inicio para deletar registros---------------------------------->
+        <div class="col-3">
+            <div class="titleText"><h2>Deletar Registros</h2></div>
+            <form action="/deleteRegistries" method="POST">
+                <div class="table-responsive pastBattles">
+                    {{#each orderAnime}}
+                        <div>
+                            <input type="checkbox" id="scales" name="{{name}}">
+                            <label for="scales">{{name}}</label>
+                        </div>
+                    {{/each}}
+                </div>  
+                <button type="submit" class="btn btn-warning" id ="deleteButton">Deletar registros</button>
+            </form>   
+        </div>
+        <!----------------------------------Fim para deletar registros---------------------------------->
+    </div>
+</main>
+

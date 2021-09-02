@@ -1,0 +1,90 @@
+body {
+    overflow-x: hidden;
+}
+
+/*--Scroll--*/
+/* width */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+  
+/* Track */
+*::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+/*--Fim dos Scroll--*/
+
+/*----------Navbar----------*/
+.navbar-brand {
+    font-family: "Lobster", "Brush Script MT", "Brush Script Std", "cursive";
+    font-size: 250%;
+    font-weight: bold;
+    margin: 10px 20px 10px 20px;
+}
+
+/*----------Main----------*/
+
+main {
+    margin: 20px 20px 20px 20px;
+}
+
+/*newList*/
+.btn-top{
+    margin: 0px 0px 0px 10px;
+}
+
+.newList {
+    margin: 0px 0px 20px 0px;
+}
+
+.alertMessage{
+    color: red;
+}
+
+/*ranking e Tabela de batalhas*/
+.ranking, .pastBattles {
+    height: 600px;
+    overflow-y: scroll;
+}
+
+/*batalha*/
+.returnBattle {
+    margin: 20px 0px 0px 0px;
+}
+
+.battleText {
+    margin: 0px 0px 20px 0px;
+}
+
+/*Batalhas passadas*/
+.titleText{
+    margin: 40px 0px 0px 0px;
+}
+
+.pastBattles{
+    margin: 20px 0px 0px 0px;
+}
+
+/*Tabelas*/
+table th, table tr {
+    text-align: center; 
+}
+
+/*Delete*/
+#deleteButton{
+    margin: 10px 0px 0px 0px;
+}
+
+
+
+/*fim ranking*/
